@@ -4,7 +4,7 @@ def cache(func: Callable) -> Callable:
     result = {}
 
     def wrapper(*args, **kwargs) -> Callable:
-        key_result = (args, tuple(kwargs.items()), func.__name__)
+        key_result = (args, tuple(sorted(kwargs.items())), func.__name__)
         if key_result in result:
             print("Getting from cache")
         else:
@@ -13,4 +13,3 @@ def cache(func: Callable) -> Callable:
         return result[key_result]
 
     return wrapper
-
